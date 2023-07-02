@@ -1,10 +1,8 @@
 <?php
 
 use App\Models\User;
-use function Pest\Laravel\actingAs;
-use function Pest\Laravel\assertDatabaseCount;
-use function Pest\Laravel\assertDatabaseHas;
-use function Pest\Laravel\post;
+
+use function Pest\Laravel\{actingAs, assertDatabaseCount, assertDatabaseHas, post};
 
 // test || it
 it('should be able to create a new question bigger than 255 characters', function () {
@@ -14,13 +12,13 @@ it('should be able to create a new question bigger than 255 characters', functio
 
     // Act :  Agir
     $request = post(route('question.store'), [
-        'question' => str_repeat('*', 260).'?',
+        'question' => str_repeat('*', 260) . '?',
     ]);
 
     // Assert : verificar
     $request->assertRedirect(route('dashboard'));
     assertDatabaseCount('questions', 1);
-    assertDatabaseHas('questions', ['question' => str_repeat('*', 260).'?']);
+    assertDatabaseHas('questions', ['question' => str_repeat('*', 260) . '?']);
 });
 
 it('should check if ends with question mark ?', function () {
@@ -45,7 +43,7 @@ it('should have at least 10 characters', function () {
 
     // Act :  Agir
     $request = post(route('question.store'), [
-        'question' => str_repeat('*', 8).'?',
+        'question' => str_repeat('*', 8) . '?',
     ]);
 
     // Assert : verificar

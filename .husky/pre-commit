@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "Starting pre-commit hook..."
+
+echo "Starting tests with PEST..."
+./vendor/bin/sail artisan test --compact
+
+#echo "Starting phpstan..."
+#docker-compose exec -T laravel.test ./vendor/bin/phpstan analyze
+
+echo "Starting linting..."
+./vendor/bin/sail pint

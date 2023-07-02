@@ -9,5 +9,5 @@ echo "Starting tests with PEST..."
 #echo "Starting phpstan..."
 #docker-compose exec -T laravel.test ./vendor/bin/phpstan analyze
 
-echo "Starting linting..."
+echo "Starting linting... only for PHP8+"
 ./vendor/bin/sail pint

@@ -4,12 +4,12 @@
 echo "Initializing pre-commit hook..."
 
 # Rodar o phpstan
-#echo "Starting phpstan..."
-#docker-compose exec -T laravel.test ./vendor/bin/phpstan analyze
-#if [ $? -ne 0 ]; then
-#    echo "Opa! Deu ruim aqui com PHPSTAN. Arrume antes de continuar... 😉";
-#    exit 1;
-#fi;
+echo "Starting phpstan..."
+docker-compose exec -T laravel.test ./vendor/bin/phpstan analyze
+if [ $? -ne 0 ]; then
+   echo "Opa! Deu ruim aqui com PHPSTAN. Arrume antes de continuar... 😉";
+   exit 1;
+fi;
 
 # rodar os testes
 ./vendor/bin/sail artisan test --parallel | php

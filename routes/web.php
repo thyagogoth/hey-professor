@@ -4,6 +4,7 @@ use App\Http\Controllers\{
     DashboardController,
     LikeController,
     ProfileController,
+    PublishController,
     QuestionController,
     UnlikeController
 };
@@ -30,6 +31,8 @@ Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verif
 Route::post('/questions', [QuestionController::class, 'store'])->name('question.store');
 Route::post('/questions/{question}/like', LikeController::class)->name('question.like');
 Route::post('/questions/{question}/unlike', UnlikeController::class)->name('question.unlike');
+
+Route::put('/questions/{question}/publish', PublishController::class)->name('question.publish');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

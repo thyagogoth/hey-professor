@@ -28,13 +28,14 @@ Route::get('/', function () {
 
 Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::post('/questions', [QuestionController::class, 'store'])->name('question.store');
-Route::post('/questions/{question}/like', LikeController::class)->name('question.like');
-Route::post('/questions/{question}/unlike', UnlikeController::class)->name('question.unlike');
-
-Route::put('/questions/{question}/publish', PublishController::class)->name('question.publish');
-
 Route::middleware('auth')->group(function () {
+    #region Questions Routes
+    Route::post('/questions', [QuestionController::class, 'store'])->name('question.store');
+    Route::post('/questions/{question}/like', LikeController::class)->name('question.like');
+    Route::post('/questions/{question}/unlike', UnlikeController::class)->name('question.unlike');
+    Route::put('/questions/{question}/publish', PublishController::class)->name('question.publish');
+
+    #region Profile Routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

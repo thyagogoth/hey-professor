@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/questions/{question}/like', LikeController::class)->name('question.like');
     Route::post('/questions/{question}/unlike', UnlikeController::class)->name('question.unlike');
     Route::put('/questions/{question}/publish', PublishController::class)->name('question.publish');
+    Route::delete('/questions/{question}/destroy', [QuestionController::class, 'destroy'])->name('question.destroy');
 
     #region Profile Routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

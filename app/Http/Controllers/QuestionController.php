@@ -52,28 +52,22 @@ class QuestionController extends Controller
     {
         $this->authorize('update', $question);
 
+        request()->validate([
+            'question' => [
+                'required',
+                'min:10',
+                function (string $attribute, mixed $value, Closure $fail) {
+                    if ($value[strlen($value) - 1] != '?') {
+                        $fail('Are you sure that is a question? It is missing the question mark in the end.');
+                    }
+                },
+            ],
+        ]);
+
         $question->question = request()->question;
         $question->save();
-        // $this->authorize('update', $question);
 
-        // $request->validate([
-        //     'question' => [
-        //         'required',
-        //         'min:10',
-        //         function (string $attribute, mixed $value, Closure $fail) {
-        //             if ($value[strlen($value) - 1] != '?') {
-        //                 $fail('Are you sure that is a question? It is missing the question mark.');
-        //             }
-        //         },
-        //     ],
-        // ]);
-
-        // $question->update([
-        //     'question' => $request->question,
-        //     'draft'    => true,
-        // ]);
-
-        return back();
+        return to_route('question.index');
     }
 
     public function destroy(Question $question): RedirectResponse

@@ -48,26 +48,30 @@ class QuestionController extends Controller
         return view('question.edit', compact('question'));
     }
 
-    public function update(Request $request, Question $question): RedirectResponse
+    public function update(Question $question): RedirectResponse
     {
         $this->authorize('update', $question);
 
-        $request->validate([
-            'question' => [
-                'required',
-                'min:10',
-                function (string $attribute, mixed $value, Closure $fail) {
-                    if ($value[strlen($value) - 1] != '?') {
-                        $fail('Are you sure that is a question? It is missing the question mark.');
-                    }
-                },
-            ],
-        ]);
+        $question->question = request()->question;
+        $question->save();
+        // $this->authorize('update', $question);
 
-        $question->update([
-            'question' => $request->question,
-            'draft'    => true,
-        ]);
+        // $request->validate([
+        //     'question' => [
+        //         'required',
+        //         'min:10',
+        //         function (string $attribute, mixed $value, Closure $fail) {
+        //             if ($value[strlen($value) - 1] != '?') {
+        //                 $fail('Are you sure that is a question? It is missing the question mark.');
+        //             }
+        //         },
+        //     ],
+        // ]);
+
+        // $question->update([
+        //     'question' => $request->question,
+        //     'draft'    => true,
+        // ]);
 
         return back();
     }

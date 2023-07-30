@@ -2,7 +2,7 @@
 
 use App\Models\{Question, User};
 
-use function Pest\Laravel\{actingAs, get};
+use function Pest\Laravel\{actingAs, get, put};
 
 it('should be able to open a question to edit', function () {
     $user     = User::factory()->create();

@@ -39,22 +39,25 @@
                                 <x-tables.tr>
                                     <x-tables.td>{{ $item->question }}</x-tables.td>
                                     <x-tables.td>{{ $item->created_at->format('d/m/Y H:i') }}</x-tables.td>
+
                                     <x-tables.td class="flex flex-wrap items-center justify-between">
-                                        <x-form.form :action="route('question.publish', $item->id)" put>
-                                            <button type="submit" class="px-2 py-1 mb-2 mr-2 text-sm font-medium text-white bg-green-500 rounded-sm hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:bg-green-500 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800">
-                                                Publish
-                                            </button>
-                                        </x-form.form>
+                                        <span class="flex flex-wrap items-center justify-between">
+                                            <x-form.form :action="route('question.publish', $item->id)" put>
+                                                <button type="submit" class="px-2 py-1 mb-2 mr-2 text-sm font-medium text-white bg-green-500 rounded-sm hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:bg-green-500 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800">
+                                                    Publish
+                                                </button>
+                                            </x-form.form>
 
-                                        <x-form.form :action="route('question.destroy', $item->id)" delete>
-                                            <button type="submit" class="px-2 py-1 mb-2 mr-2 text-sm font-medium text-white bg-red-500 rounded-sm hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
-                                                Remove
-                                            </button>
-                                        </x-form.form>
+                                            <x-form.form :action="route('question.destroy', $item->id)" delete>
+                                                <button type="submit" class="px-2 py-1 mb-2 mr-2 text-sm font-medium text-white bg-red-500 rounded-sm hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                                                    Remove
+                                                </button>
+                                            </x-form.form>
 
-                                        <a href="{{ route('question.edit', $item->id)}}" class="px-2 py-1 mb-2 mr-2 text-sm font-medium text-white bg-orange-500 rounded-sm hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 dark:bg-orange-500 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800">
-                                            Editar
-                                        </a>
+                                            <a href="{{ route('question.edit', $item->id)}}" class="px-2 py-1 mb-2 mr-2 text-sm font-medium text-white bg-orange-500 rounded-sm hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 dark:bg-orange-500 dark:hover:bg-orange-700 focus:outline-none dark:focus:ring-orange-800">
+                                                Editar
+                                            </a>
+                                        </span>
                                     </x-tables.td>
                                 </x-tables.tr>
                             @endforeach

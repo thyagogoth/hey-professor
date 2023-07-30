@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
@@ -12,7 +11,7 @@ class DashboardController extends Controller
     {
         return view('dashboard', [
             'questions' => Question::query()
-                ->when(request()->has('search'), function (Builder $query) {
+                ->when(request()->has('search'), function ($query) {
                     $query->where('question', 'like', '%' . request()->search . '%');
                 })
                 ->withSum('votes', 'like')

@@ -9,7 +9,7 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
 
             <div>
-                <x-form.form post :action="route('question.update', $question->id)">
+                <x-form.form put :action="route('question.update', $question->id)">
 
                     <x-form.textarea label="Question" name="question" required="required" :value="$question->question"/>
 

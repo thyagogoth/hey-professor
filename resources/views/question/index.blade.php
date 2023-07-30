@@ -31,6 +31,7 @@
                             <tr>
                                 <x-tables.th>Question</x-tables.th>
                                 <x-tables.th>Created at</x-tables.th>
+                                <x-tables.th>Updated at</x-tables.th>
                                 <x-tables.th>Action</x-tables.th>
                             </tr>
                         </x-tables.thead>
@@ -39,6 +40,7 @@
                                 <x-tables.tr>
                                     <x-tables.td>{{ $item->question }}</x-tables.td>
                                     <x-tables.td>{{ $item->created_at->format('d/m/Y H:i') }}</x-tables.td>
+                                    <x-tables.td>{{ $item->updated_at->format('d/m/Y H:i') }}</x-tables.td>
 
                                     <x-tables.td class="flex flex-wrap items-center justify-between">
                                         <span class="flex flex-wrap items-center justify-between">

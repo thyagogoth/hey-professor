@@ -14,4 +14,14 @@ class QuestionPolicy
         return $question->createdBy->is($user);
     }
 
+    public function update(User $user, Question $question): bool
+    {
+        return $question->createdBy->is($user) && $question->draft;
+    }
+
+    public function destroy(User $user, Question $question): bool
+    {
+        return $question->createdBy->is($user);
+    }
+
 }

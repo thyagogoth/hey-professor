@@ -31,11 +31,15 @@ Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verif
 Route::middleware('auth')->group(function () {
     #region Questions Routes
     Route::get('/questions', [QuestionController::class, 'index'])->name('question.index');
+    Route::post('/questions/store', [QuestionController::class, 'store'])->name('question.store');
+    Route::get('/questions/{question}/edit', [QuestionController::class, 'edit'])->name('question.edit');
+    Route::put('/questions/{question}/update', [QuestionController::class, 'update'])->name('question.update');
+    Route::delete('/questions/{question}/destroy', [QuestionController::class, 'destroy'])->name('question.destroy');
 
-    Route::post('/questions', [QuestionController::class, 'store'])->name('question.store');
+    Route::put('/questions/{question}/publish', PublishController::class)->name('question.publish');
+
     Route::post('/questions/{question}/like', LikeController::class)->name('question.like');
     Route::post('/questions/{question}/unlike', UnlikeController::class)->name('question.unlike');
-    Route::put('/questions/{question}/publish', PublishController::class)->name('question.publish');
 
     #region Profile Routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

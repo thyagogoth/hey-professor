@@ -83,5 +83,5 @@ test('question should be unique', function () {
 
     post(route('question.store'), [
         'question' => 'Alguma Pergunta?',
-    ])->assertSessionHasErrors(['question' => 'Pergunta já existe!']);
+    ])->assertSessionHasErrors(['question' => 'This question already exists!']);
 });

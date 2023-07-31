@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
-use Illuminate\View\View;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 
 class DashboardController extends Controller
 {
@@ -11,7 +12,7 @@ class DashboardController extends Controller
     {
         return view('dashboard', [
             'questions' => Question::query()
-                ->when(request()->has('search'), function ($query) {
+                ->when(request()->has('search'), function (Builder $query) {
                     $query->where('question', 'like', '%' . request()->search . '%');
                 })
                 ->withSum('votes', 'like')
@@ -20,8 +21,7 @@ class DashboardController extends Controller
                     case when votes_sum_like is null then 0 else votes_sum_like end desc,
                     case when votes_sum_unlike is null then 0 else votes_sum_unlike end
                 ')
-                ->paginate(25),
+                ->paginate(5),
         ]);
     }
-
 }

@@ -9,11 +9,15 @@ use Illuminate\Http\{RedirectResponse, Request};
 
 class QuestionController extends Controller
 {
-    public function index(Request $request): View
+    public function index(): View
     {
-        $questions = auth()->user()->questions;
+        $questions         = auth()->user()->questions;
+        $archivedQuestions = auth()->user()->questions()->onlyTrashed()->get();
 
-        return view('question.index', compact('questions'));
+        return view('question.index', [
+            'questions'         => $questions,
+            'archivedQuestions' => $archivedQuestions,
+        ]);
     }
 
     public function store(Request $request): RedirectResponse

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
-use Illuminate\Database\Eloquent\{Model, Prunable, SoftDeletes};
+use Illuminate\Database\Eloquent\{Builder, Model, Prunable, SoftDeletes};
 
 class Question extends Model
 {
@@ -12,15 +12,13 @@ class Question extends Model
     use Prunable;
     use SoftDeletes;
 
-    public function prunable()
+    public function prunable(): Builder
     {
-        return static::where('deleted_at', '<=', now()
-            ->subMonths(1))
-            ->forceDelete();
+        return static::where('deleted_at', '<=', now()->subMonth());
     }
 
     protected $casts = [
-        'draft' => 'boolean',
+        'draft' => 'bool',
     ];
 
     /**

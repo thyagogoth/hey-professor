@@ -14,7 +14,6 @@
                 <hr class="my-4 mb-4 border-gray-700">
 
                 <div class="dark:text-gray-400">
-
                     <form method="get" action="{{ route('dashboard') }}" class="flex items-center mb-2 space-x-2">
                         <x-text-input type="text" name="search" value="{{ request()->search }}" class="w-full" />
                         <x-primary-button class="dark:bg-slate-500" type="submit">Search</x-primary-button>

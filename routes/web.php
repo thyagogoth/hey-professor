@@ -6,7 +6,8 @@ use App\Http\Controllers\{
     ProfileController,
     PublishController,
     QuestionController,
-    UnlikeController
+    UnlikeController,
+    Auth\Github
 };
 
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get(
+    '/github/login',
+    Github\RedirectController::class
+)->name('github.login');
+
+Route::get('/github/callback', Github\CallbackController::class)->name('github.callback');
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');

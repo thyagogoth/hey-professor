@@ -7,7 +7,8 @@ use App\Http\Controllers\{
     PublishController,
     QuestionController,
     UnlikeController,
-    Auth\Github
+    Auth\Github,
+    Auth\Google
 };
 
 use Illuminate\Support\Facades\Route;
@@ -27,14 +28,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get(
-    '/github/login',
-    Github\RedirectController::class
-)->name('github.login');
-
+/*** Social login routes ***/
+// github
+Route::get('/github/login', Github\RedirectController::class)->name('github.login');
 Route::get('/github/callback', Github\CallbackController::class)->name('github.callback');
 
+// google
+Route::get('/google/login', Google\RedirectController::class)->name('google.login');
+Route::get('/google/callback', Google\CallbackController::class)->name('google.callback');
+
+/*** end Social login routes ***/
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');

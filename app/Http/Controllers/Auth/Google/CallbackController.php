@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Github;
+namespace App\Http\Controllers\Auth\Google;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -12,15 +11,14 @@ class CallbackController extends Controller
 {
     public function __invoke()
     {
-        $githubUser = Socialite::driver('github')->user();
+        $googleUser = Socialite::driver('google')->user();
 
         $user = User::updateOrCreate([
-            'email' => $githubUser->email,
+            'email' => $googleUser->email,
         ], [
-            'name' => $githubUser->name,
-            'email' => $githubUser->email,
-            'password' => bcrypt($githubUser->token),
-            'github_id' => $githubUser->id ?? null,
+            'name' => $googleUser->name,
+            'email' => $googleUser->email,
+            'password' => bcrypt($googleUser->token),
             'email_verified_at' => now()
         ]);
 

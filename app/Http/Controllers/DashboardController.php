@@ -21,7 +21,7 @@ class DashboardController extends Controller
                     case when votes_sum_like is null then 0 else votes_sum_like end desc,
                     case when votes_sum_unlike is null then 0 else votes_sum_unlike end
                 ')
-                ->paginate(5),
+                ->paginate(10),
         ]);
     }
 }
